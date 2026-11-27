@@ -65,9 +65,12 @@ a{color:inherit}
 .ended .was,.ended .off{display:none}
 
 /* ---------- Pay badges ---------- */
-.pay{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.pay span{font-size:.72rem;font-weight:800;letter-spacing:.06em;padding:6px 10px;border-radius:5px;background:var(--surface-2);border:1px solid var(--line);color:var(--fg)}
-.pay .lock{background:none;border:0;padding:0 4px 0 0;color:var(--muted);font-weight:600;letter-spacing:.02em}
+.pay{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center}
+.pay .lock{flex:0 0 100%;text-align:center;font-size:.8rem;font-weight:600;letter-spacing:.02em;color:var(--muted)}
+.pay .lock svg{width:.95em;height:.95em;vertical-align:-.12em;margin-right:.4em;fill:currentColor}
+.pay .card{display:inline-flex;align-items:center;justify-content:center;height:30px;padding:0 9px;border-radius:6px;background:var(--surface-2);border:1px solid var(--line);color:var(--fg);font-size:.7rem;font-weight:800;letter-spacing:.05em;white-space:nowrap}
+.buyrow .pay{justify-content:flex-start}
+.buyrow .pay .lock{text-align:left}
 
 /* ---------- Hero ---------- */
 .hero{position:relative;overflow:hidden;background:radial-gradient(ellipse 60% 70% at 78% 60%,rgba(255,106,26,.28),transparent 70%),var(--bg)}
@@ -156,7 +159,7 @@ a{color:inherit}
 .timer .u b{font-family:var(--mono);font-size:1.6rem;line-height:1.1;font-weight:700}
 .timer .u small{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .ended .timer{display:none}
-.order .cta{width:100%;font-size:1.12rem;padding:1.2em 1.4em}
+.order .cta{width:100%;font-size:1.05rem;padding:1.2em 1.2em;white-space:nowrap}
 .fine{font-size:.86rem;color:var(--muted)}
 
 /* ---------- FAQ ---------- */
@@ -247,7 +250,7 @@ footer b{color:var(--orange);font-family:var(--mono);font-weight:700}
         <div class="buyrow">
           <a class="cta pulse payhip-buy-button" data-buy href="https://payhip.com/b/zw8ra" data-product="zw8ra" data-theme="none" data-method="overlay" target="_blank" rel="noopener">Get it now <span class="arr">→</span></a>
           <div class="pay" aria-label="Payment methods">
-            <span class="lock">🔒 Secure</span><span>VISA</span><span>MASTERCARD</span><span>APPLE PAY</span><span>GOOGLE PAY</span>
+            <span class="lock"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V11a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm-3 8V6a3 3 0 0 1 6 0v3H9z"/></svg>Secure checkout</span><span class="card">VISA</span><span class="card">Mastercard</span><span class="card">Apple Pay</span><span class="card">Google Pay</span>
           </div>
         </div>
         <p class="meta"><span><i>25</i> pages</span><span><i>30</i> days</span><span><i>0</i> excuses</span></p>
@@ -351,7 +354,7 @@ footer b{color:var(--orange);font-family:var(--mono);font-weight:700}
             <span class="off">Save $8</span>
           </div>
           <a class="cta pulse payhip-buy-button" data-buy href="https://payhip.com/b/zw8ra" data-product="zw8ra" data-theme="none" data-method="overlay" target="_blank" rel="noopener">Get instant access <span class="arr">→</span></a>
-          <div class="pay"><span class="lock">🔒 Secure checkout</span><span>VISA</span><span>MASTERCARD</span><span>APPLE PAY</span><span>GOOGLE PAY</span></div>
+          <div class="pay"><span class="lock"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V11a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm-3 8V6a3 3 0 0 1 6 0v3H9z"/></svg>Secure checkout</span><span class="card">VISA</span><span class="card">Mastercard</span><span class="card">Apple Pay</span><span class="card">Google Pay</span></div>
         </div>
       </div>
     </div>
