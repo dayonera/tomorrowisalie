@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Tomorrow Is a Lie: a 30-day action guide.">
+<meta property="og:title" content="Tomorrow Is a Lie">
+<meta property="og:image" content="cover.jpg">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Tomorrow Is a Lie</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: one dark editorial column, full-bleed bands; orange = the book's voice, gold = money/action only */
+:root{
+  --bg:#0a0908;
+  --surface:#141110;
+  --surface-2:#1c1816;
+  --line:#2c2622;
+  --fg:#f6f1eb;
+  --muted:#a69c93;
+  --orange:#ff6a1a;
+  --gold:#ffc83d;
+  --gold-2:#ffdf7e;
+  --ink:#0a0908;
+  --display:"Anton","Impact","Arial Narrow Bold",sans-serif;
+  --body:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--gold)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.95;letter-spacing:.005em;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:inherit}
+.eyebrow{font-size:.74rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--orange)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* ---------- Promo bar ---------- */
+.promo{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--gold);color:var(--ink)}
+.promo .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 14px;padding-block:9px;font-weight:800;font-size:.86rem;letter-spacing:.06em;text-transform:uppercase;text-align:center}
+.promo .tag{background:var(--ink);color:var(--gold);padding:3px 8px;border-radius:3px;font-size:.78rem}
+.promo .clock{font-family:var(--mono);font-size:1rem;letter-spacing:.02em}
+.promo.ended .live{display:none}
+
+/* ---------- Buttons ---------- */
+.cta{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.7em;background:linear-gradient(180deg,var(--gold-2),var(--gold) 55%,#f2b11c);color:var(--ink);text-decoration:none;font-weight:800;font-size:1.06rem;letter-spacing:.06em;text-transform:uppercase;padding:1.1em 2em;border-radius:999px;box-shadow:0 0 0 1px rgba(255,200,61,.6),0 10px 40px -8px rgba(255,200,61,.65);transition:transform .15s ease,box-shadow .15s ease}
+.cta:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(255,200,61,.9),0 16px 50px -6px rgba(255,200,61,.8)}
+.cta:focus-visible{outline:3px solid var(--fg);outline-offset:4px}
+.cta .arr{font-size:1.25em;line-height:1;transition:transform .15s}
+.cta:hover .arr{transform:translateX(4px)}
+.cta.pulse::after{content:"";position:absolute;inset:-4px;border-radius:999px;border:2px solid var(--gold);opacity:0;animation:ring 2.4s ease-out infinite}
+@keyframes ring{0%{opacity:.7;transform:scale(.98)}70%,100%{opacity:0;transform:scale(1.08)}}
+
+/* ---------- Price ---------- */
+.price{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 14px}
+.price .now{font-family:var(--display);font-size:3.4rem;line-height:1;color:var(--fg)}
+.price .was{font-family:var(--display);font-size:1.7rem;color:var(--muted);text-decoration:line-through;text-decoration-color:var(--orange);text-decoration-thickness:3px}
+.price .off{align-self:center;background:var(--orange);color:var(--ink);font-weight:800;font-size:.82rem;letter-spacing:.08em;padding:5px 9px;border-radius:3px}
+.ended .was,.ended .off{display:none}
+
+/* ---------- Pay badges ---------- */
+.pay{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pay span{font-size:.72rem;font-weight:800;letter-spacing:.06em;padding:6px 10px;border-radius:5px;background:var(--surface-2);border:1px solid var(--line);color:var(--fg)}
+.pay .lock{background:none;border:0;padding:0 4px 0 0;color:var(--muted);font-weight:600;letter-spacing:.02em}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;background:radial-gradient(ellipse 60% 70% at 78% 60%,rgba(255,106,26,.28),transparent 70%),var(--bg)}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding-block:64px 88px}
+.hero-copy{display:grid;gap:26px;min-width:0}
+.hero h1{font-size:clamp(3.6rem,10vw,8.2rem)}
+.hero h1 .o{color:var(--orange)}
+.hero .lead{font-size:1.2rem;color:#d8d0c8;max-width:31em}
+.hero .lead b{color:var(--fg)}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:.8rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.hero .meta i{font-style:normal;color:var(--orange)}
+.buyrow{display:flex;flex-wrap:wrap;align-items:center;gap:18px 26px}
+.cover-wrap{position:relative;justify-self:center;width:min(380px,100%)}
+.cover-wrap img{display:block;width:100%;max-width:100%;height:auto;border-radius:6px;box-shadow:0 40px 80px -20px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.06);transform:perspective(1200px) rotateY(-12deg) rotateX(3deg);transition:transform .5s ease}
+.cover-wrap:hover img{transform:perspective(1200px) rotateY(-4deg) rotateX(1deg)}
+.cover-wrap .sticker{position:absolute;top:-18px;right:-10px;width:104px;height:104px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-content:center;text-align:center;font-weight:800;line-height:1.05;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;transform:rotate(12deg);box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.cover-wrap .sticker b{font-family:var(--display);font-weight:400;font-size:2rem;letter-spacing:0}
+.ended .sticker{display:none}
+
+/* ---------- Marquee ---------- */
+.marquee{background:var(--orange);color:var(--ink);overflow:hidden;border-block:1px solid #000}
+.marquee .track{display:flex;width:max-content;animation:slide 38s linear infinite}
+.marquee span{font-family:var(--display);font-size:1.5rem;text-transform:uppercase;padding:14px 0;white-space:nowrap}
+.marquee span::after{content:"✦";margin:0 26px;font-size:1rem;vertical-align:middle}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ---------- Sections ---------- */
+.band .wrap{padding-block:96px}
+.head{display:grid;gap:14px;max-width:44rem;margin-bottom:48px}
+.head h2{font-size:clamp(2.4rem,6vw,4.4rem)}
+.head p{color:var(--muted);font-size:1.08rem}
+
+.truth{background:var(--fg);color:var(--ink)}
+.truth .wrap{display:grid;grid-template-columns:auto 1fr;gap:28px 48px;align-items:start}
+.truth .big{font-family:var(--display);font-size:clamp(2.4rem,6.4vw,5rem);line-height:.98;text-transform:uppercase;text-wrap:balance}
+.truth .big em{font-style:normal;color:var(--orange)}
+.truth .src{font-size:.74rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg);color:#6d655e;padding-top:6px}
+.truth p.after{grid-column:2;max-width:36em;font-size:1.12rem;color:#3d3833}
+
+/* rules */
+.rules{display:grid;gap:0;border-top:1px solid var(--line)}
+.rule{display:grid;grid-template-columns:150px 1fr 1fr;gap:16px 40px;padding:30px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.rule .n{font-family:var(--mono);font-size:.82rem;font-weight:700;letter-spacing:.12em;color:var(--orange)}
+.rule h3{font-size:clamp(1.7rem,3.2vw,2.4rem)}
+.rule p{color:var(--muted);min-width:0}
+.rule p b{color:var(--fg);font-weight:600}
+
+/* lines */
+.lines{background:var(--surface)}
+.quotes{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.q{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:34px 30px;display:grid;gap:22px;align-content:space-between;min-height:220px}
+.q blockquote{margin:0;font-family:var(--display);font-size:clamp(1.7rem,3vw,2.3rem);line-height:1.04;text-transform:uppercase}
+.q blockquote .o{color:var(--orange)}
+.q .p{font-family:var(--mono);font-size:.76rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;display:flex;justify-content:space-between;gap:10px}
+.q.hot{background:var(--orange);border-color:var(--orange);color:var(--ink)}
+.q.hot .p{color:rgba(10,9,8,.7)}
+.q.hot blockquote .o{color:var(--fg)}
+
+/* weeks */
+.weeks{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.wk{padding:28px 24px;display:grid;gap:12px;align-content:start;border-left:1px solid var(--line);min-width:0;position:relative}
+.wk:first-child{border-left:0}
+.wk .d{font-family:var(--mono);font-size:.75rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.wk h3{font-size:2.1rem}
+.wk p{color:var(--muted);font-size:.96rem}
+.wk .bar{height:6px;border-radius:3px;background:var(--surface-2);overflow:hidden}
+.wk .bar i{display:block;height:100%;background:var(--orange)}
+.wk:last-child{background:linear-gradient(180deg,rgba(255,106,26,.16),transparent)}
+.inside{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.inside span{border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:.92rem;font-weight:600}
+.inside span::before{content:"✓";color:var(--orange);margin-right:8px;font-weight:800}
+
+/* ---------- Checkout ---------- */
+.checkout{background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(255,200,61,.14),transparent 70%),var(--bg)}
+.order{max-width:860px;margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:36px;padding:36px;border-radius:18px;background:linear-gradient(var(--surface),var(--surface)) padding-box,linear-gradient(140deg,var(--gold),rgba(255,106,26,.7) 40%,var(--line) 70%,var(--gold)) border-box;border:2px solid transparent;box-shadow:0 30px 90px -30px rgba(255,200,61,.35)}
+.order img{width:100%;max-width:100%;height:auto;border-radius:6px;box-shadow:0 20px 40px rgba(0,0,0,.6)}
+.order-body{display:grid;gap:20px;align-content:start;min-width:0}
+.order h2{font-size:clamp(2rem,4.4vw,2.9rem)}
+.order ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.order li{display:grid;grid-template-columns:22px 1fr;gap:8px;color:#d8d0c8}
+.order li::before{content:"✓";color:var(--gold);font-weight:800}
+.timer{display:flex;align-items:center;flex-wrap:wrap;gap:10px 16px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.timer .lbl{font-size:.78rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.timer .units{display:flex;gap:8px}
+.timer .u{display:grid;justify-items:center;min-width:52px}
+.timer .u b{font-family:var(--mono);font-size:1.6rem;line-height:1.1;font-weight:700}
+.timer .u small{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.ended .timer{display:none}
+.order .cta{width:100%;font-size:1.12rem;padding:1.2em 1.4em}
+.fine{font-size:.86rem;color:var(--muted)}
+
+/* ---------- FAQ ---------- */
+.faq .wrap{max-width:860px}
+.faq details{border-bottom:1px solid var(--line);padding:20px 0}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;font-weight:600;font-size:1.08rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--display);font-size:1.6rem;line-height:1;color:var(--orange)}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin-top:10px;color:var(--muted);max-width:62ch}
+
+/* ---------- Final ---------- */
+.final{text-align:center}
+.final .wrap{display:grid;justify-items:center;gap:26px;padding-block:110px}
+.final h2{font-size:clamp(3.4rem,11vw,8rem)}
+.final h2 .o{color:var(--orange)}
+.final p{color:var(--muted);max-width:30em;font-size:1.1rem}
+
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.86rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-block:28px}
+footer b{color:var(--orange);font-family:var(--mono);font-weight:700}
+
+/* ---------- Mobile sticky ---------- */
+.sticky{display:none}
+
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;padding-block:36px 64px;gap:44px}
+  .cover-wrap{width:min(280px,78%);order:-1}
+  .cover-wrap .sticker{width:86px;height:86px;font-size:.62rem;top:-12px;right:-14px}
+  .cover-wrap .sticker b{font-size:1.6rem}
+  .band .wrap{padding-block:64px}
+  .truth .wrap{grid-template-columns:1fr}
+  .truth .src{writing-mode:horizontal-tb;transform:none;padding:0}
+  .truth p.after{grid-column:1}
+  .rule{grid-template-columns:1fr;gap:8px}
+  .quotes{grid-template-columns:1fr}
+  .q{min-height:0}
+  .weeks{grid-template-columns:1fr 1fr}
+  .wk:nth-child(3){border-left:0}
+  .wk:nth-child(n+3){border-top:1px solid var(--line)}
+  .order{grid-template-columns:1fr;padding:24px;gap:24px}
+  .order img{width:150px;justify-self:center}
+  .price .now{font-size:2.9rem}
+  .sticky{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;align-items:center;justify-content:space-between;gap:12px;background:rgba(10,9,8,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+  .sticky .sp{display:grid;line-height:1.1}
+  .sticky .sp b{font-family:var(--display);font-weight:400;font-size:1.7rem}
+  .sticky .sp small{font-family:var(--mono);font-size:.72rem;color:var(--gold)}
+  .ended .sticky .sp small{display:none}
+  .sticky .cta{padding:.85em 1.3em;font-size:.92rem}
+  footer .wrap{padding-bottom:100px}
+}
+@media (max-width:480px){
+  .weeks{grid-template-columns:1fr}
+  .wk{border-left:0!important;border-top:1px solid var(--line)}
+  .wk:first-child{border-top:0}
+  .timer .u{min-width:44px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .cover-wrap img{transform:none}
+}
+</style>
+</head>
+<body>
+<div class="page" id="page">
+
+<div class="promo" role="status">
+  <div class="wrap">
+    <span class="live"><span class="tag">−35%</span></span>
+    <span class="live">Launch price ends in <span class="clock" data-clock>--:--:--</span></span>
+    <span class="after-end" hidden>Tomorrow Is a Lie · 30-day action guide</span>
+  </div>
+</div>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="eyebrow">A 30-day action guide · Instant PDF</p>
+        <h1>Tomorrow<br>is a <span class="o">lie.</span></h1>
+        <p class="lead">You don't need more motivation. <b>You need a first step.</b> 25 pages. One idea and one tiny action per page. By the last one, you're already moving.</p>
+        <div class="price" aria-label="Price">
+          <span class="now" data-now>$14.95</span>
+          <span class="was">$22.95</span>
+          <span class="off">Save 35%</span>
+        </div>
+        <div class="buyrow">
+          <a class="cta pulse payhip-buy-button" data-buy href="https://payhip.com/b/zw8ra" data-product="zw8ra" data-theme="none" data-method="overlay" target="_blank" rel="noopener">Get it now <span class="arr">→</span></a>
+          <div class="pay" aria-label="Payment methods">
+            <span class="lock">🔒 Secure</span><span>VISA</span><span>MASTERCARD</span><span>APPLE PAY</span><span>GOOGLE PAY</span>
+          </div>
+        </div>
+        <p class="meta"><span><i>25</i> pages</span><span><i>30</i> days</span><span><i>0</i> excuses</span></p>
+      </div>
+      <div class="cover-wrap">
+        <img src="cover.jpg" width="800" height="1197" alt="Tomorrow Is a Lie, the e-book cover">
+        <div class="sticker"><span>Launch<br>price</span><b>−35%</b></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Fear shrinks after you move</span><span>Boring days build big lives</span><span>Never miss twice</span><span>Proof beats motivation</span><span>Day one is today</span><span>Small and daily beats huge and once</span>
+      <span>Fear shrinks after you move</span><span>Boring days build big lives</span><span>Never miss twice</span><span>Proof beats motivation</span><span>Day one is today</span><span>Small and daily beats huge and once</span>
+    </div>
+  </div>
+
+  <section class="band truth">
+    <div class="wrap">
+      <span class="src">From page 05</span>
+      <p class="big">“I'll start when I'm ready” is just a fancy way of saying <em>“never.”</em></p>
+      <p class="after">You've watched the videos. You've saved the quotes. You've said “this year I'm changing” at least ten times. Then the same day, the same phone, the same couch. This book doesn't give you a feeling. It gives you a plan.</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Inside the book</p>
+        <h2>Five rules that get you off the couch</h2>
+      </div>
+      <div class="rules">
+        <div class="rule"><span class="n">RULE 01</span><h3>Make it stupidly small</h3><p>Big goals scare your brain. Tiny actions sneak past it. <b>“Run 5 km” becomes “put on your shoes.”</b></p></div>
+        <div class="rule"><span class="n">RULE 02</span><h3>Move first</h3><p>Motivation comes after, not before. <b>Feelings are weather. Actions are direction.</b></p></div>
+        <div class="rule"><span class="n">RULE 03</span><h3>Kill the friction</h3><p>Make the good stuff easy and the bad stuff annoying. <b>You need fewer obstacles, not more discipline.</b></p></div>
+        <div class="rule"><span class="n">RULE 04</span><h3>Become the person first</h3><p>Every time you follow through, <b>you cast a vote for who you're becoming.</b></p></div>
+        <div class="rule"><span class="n">RULE 05</span><h3>Stack it</h3><p>Attach the new action to something you already do. <b>“After I brush my teeth, I do 10 push-ups.”</b></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band lines">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Screenshot these</p>
+        <h2>Lines you'll want on your lock screen</h2>
+      </div>
+      <div class="quotes">
+        <figure class="q hot" style="margin:0"><blockquote>Overthinking is just fear wearing a <span class="o">smart outfit.</span></blockquote><figcaption class="p"><span>The enemy</span><span>p. 11</span></figcaption></figure>
+        <figure class="q" style="margin:0"><blockquote>Falling is not failing. <span class="o">Staying down is.</span></blockquote><figcaption class="p"><span>When you fall</span><span>p. 16</span></figcaption></figure>
+        <figure class="q" style="margin:0"><blockquote>Consuming feeds your ego. <span class="o">Acting feeds your life.</span></blockquote><figcaption class="p"><span>Fuel</span><span>p. 15</span></figcaption></figure>
+        <figure class="q" style="margin:0"><blockquote>The comfort zone is a cage with a <span class="o">nice sofa.</span></blockquote><figcaption class="p"><span>Comfort zone</span><span>p. 12</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">The challenge</p>
+        <h2>Your 30 days, one tiny action at a time</h2>
+        <p>No crazy plan. Four weeks, one small action a day, a little bigger each week.</p>
+      </div>
+      <div class="weeks">
+        <div class="wk"><span class="d">Days 1–7</span><h3>Start</h3><p>One tiny action a day. 2 minutes. Just show up.</p><div class="bar"><i style="width:25%"></i></div></div>
+        <div class="wk"><span class="d">Days 8–14</span><h3>Anchor</h3><p>Stack it on a daily habit. Try the 10-minute morning.</p><div class="bar"><i style="width:50%"></i></div></div>
+        <div class="wk"><span class="d">Days 15–21</span><h3>Push</h3><p>Go up to 5 minutes. Get through the valley of silence.</p><div class="bar"><i style="width:75%"></i></div></div>
+        <div class="wk"><span class="d">Days 22–30</span><h3>Own it</h3><p>10 to 15 minutes. Look back at day 1. Be proud.</p><div class="bar"><i style="width:100%"></i></div></div>
+      </div>
+      <div class="inside">
+        <span>30-day tracker</span><span>The 10-minute morning</span><span>The 60-second reset</span><span>“Your why” worksheet</span><span>The promise page</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="band checkout" id="buy">
+    <div class="wrap">
+      <div class="order">
+        <img src="cover.jpg" width="800" height="1197" alt="">
+        <div class="order-body">
+          <p class="eyebrow" style="color:var(--gold)">Your order</p>
+          <h2>Tomorrow Is a Lie</h2>
+          <ul>
+            <li>The full 25-page e-book (PDF)</li>
+            <li>The 30-day challenge and printable tracker</li>
+            <li>Reads on any phone, tablet or computer</li>
+            <li>Download link sent to your email right after payment</li>
+          </ul>
+          <div class="timer">
+            <span class="lbl">Launch price ends in</span>
+            <div class="units">
+              <div class="u"><b data-h>--</b><small>hours</small></div>
+              <div class="u"><b data-m>--</b><small>min</small></div>
+              <div class="u"><b data-s>--</b><small>sec</small></div>
+            </div>
+          </div>
+          <div class="price">
+            <span class="now" data-now>$14.95</span>
+            <span class="was">$22.95</span>
+            <span class="off">Save $8</span>
+          </div>
+          <a class="cta pulse payhip-buy-button" data-buy href="https://payhip.com/b/zw8ra" data-product="zw8ra" data-theme="none" data-method="overlay" target="_blank" rel="noopener">Get instant access <span class="arr">→</span></a>
+          <div class="pay"><span class="lock">🔒 Secure checkout</span><span>VISA</span><span>MASTERCARD</span><span>APPLE PAY</span><span>GOOGLE PAY</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band faq">
+    <div class="wrap">
+      <div class="head"><p class="eyebrow">Questions</p><h2>FAQ</h2></div>
+      <details><summary>How do I get the e-book?</summary><p>Right after payment you get an email with a link to download the PDF. You can start reading in under two minutes.</p></details>
+      <details><summary>What can I read it on?</summary><p>It's a PDF, so it opens on any phone, tablet or computer. No app needed.</p></details>
+      <details><summary>Is the payment secure?</summary><p>Yes. Payment goes through a secure card checkout. Your card details are never stored on this site.</p></details>
+      <details><summary>How long is the launch price on?</summary><p>Until the countdown hits zero. After that, the price goes back to $22.95.</p></details>
+      <details><summary>I didn't get the email. What do I do?</summary><p>Check your spam or Promotions folder. Still nothing? Contact us and we'll send it again.</p></details>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <p class="eyebrow">The last page. The first day.</p>
+      <h2>Day one<br>is <span class="o">today.</span></h2>
+      <p>The person you want to become is on the other side of the first step.</p>
+      <a class="cta pulse payhip-buy-button" data-buy href="https://payhip.com/b/zw8ra" data-product="zw8ra" data-theme="none" data-method="overlay" target="_blank" rel="noopener">Start now · <span data-now>$14.95</span> <span class="arr">→</span></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Tomorrow Is a Lie · Digital product (PDF)</span><span>Post your day 1 <b>#TOMORROWISALIE</b></span></div>
+</footer>
+
+<div class="sticky">
+  <div class="sp"><b data-now>$14.95</b><small>Ends in <span data-clock>--:--:--</span></small></div>
+  <a class="cta payhip-buy-button" data-buy href="https://payhip.com/b/zw8ra" data-product="zw8ra" data-theme="none" data-method="overlay" target="_blank" rel="noopener">Get it now →</a>
+</div>
+
+</div>
+
+<script src="https://payhip.com/payhip.js"></script>
+<script>
+/* ===== Settings to edit ===== */
+var BUY_URL   = "https://payhip.com/b/zw8ra";        // Payhip product (PayTabs checkout)
+var PROMO_END = "2026-11-30T21:00:00Z";              // real end of the launch price (UTC)
+var PRICE_PROMO = "$14.95", PRICE_FULL = "$22.95";
+/* ============================ */
+(function(){
+  document.querySelectorAll("[data-buy]").forEach(function(a){ a.href = BUY_URL; });
+  var end = Date.parse(PROMO_END), root = document.getElementById("page");
+  function pad(n){ return (n < 10 ? "0" : "") + n; }
+  function tick(){
+    var left = Math.max(0, end - Date.now());
+    if (left <= 0){
+      root.classList.add("ended");
+      document.querySelector(".promo").classList.add("ended");
+      document.querySelectorAll(".after-end").forEach(function(e){ e.hidden = false; });
+      document.querySelectorAll("[data-now]").forEach(function(e){ e.textContent = PRICE_FULL; });
+      return false;
+    }
+    var s = Math.floor(left / 1000), h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), sec = s % 60;
+    var txt = pad(h) + ":" + pad(m) + ":" + pad(sec);
+    document.querySelectorAll("[data-clock]").forEach(function(e){ e.textContent = txt; });
+    document.querySelectorAll("[data-h]").forEach(function(e){ e.textContent = pad(h); });
+    document.querySelectorAll("[data-m]").forEach(function(e){ e.textContent = pad(m); });
+    document.querySelectorAll("[data-s]").forEach(function(e){ e.textContent = pad(sec); });
+    return true;
+  }
+  if (tick()){ var t = setInterval(function(){ if (!tick()) clearInterval(t); }, 1000); }
+})();
+</script>
+</body>
+</html>
